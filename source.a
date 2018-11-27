@@ -1,0 +1,7 @@
+;Comandare in faza a unui tiristor pentru a efectua
+;redresare monoalternanta
+;Bejdak Martina, Balanescu Adrian, Chirap Andrei - E115
+	
+	ORG 0000H
+
+	END

@@ -1,0 +1,20 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\balan\Documents\embedded_systems_asm_project\redresor_monoalternanta_cu_tiristor.uv2
+Project File Date:  11/27/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling source.a...
+source.a(4): warning A41: MISSING 'END' STATEMENT
+linking...
+Program Size: data=8.0 xdata=0 code=0
+"redresor_monoalternanta_cu_tiristor" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling source.a...
+linking...
+Program Size: data=8.0 xdata=0 code=0
+"redresor_monoalternanta_cu_tiristor" - 0 Error(s), 0 Warning(s).

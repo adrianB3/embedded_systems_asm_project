@@ -1,0 +1,36 @@
+BL51 BANKED LINKER/LOCATER V5.02                                                        11/27/2018  19:21:30  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.02, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE source.obj TO redresor_monoalternanta_cu_tiristor
+
+
+INPUT MODULES INCLUDED:
+  source.obj (SOURCE)
+
+
+LINK MAP OF MODULE:  redresor_monoalternanta_cu_tiristor (SOURCE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+
+
+SYMBOL TABLE OF MODULE:  redresor_monoalternanta_cu_tiristor (SOURCE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SOURCE
+  -------         ENDMOD        SOURCE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 1000H BYTE CODE SIZE LIMIT; USED: 0000H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=0
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

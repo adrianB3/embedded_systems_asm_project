@@ -1,0 +1,30 @@
+A51 MACRO ASSEMBLER  SOURCE                                                               11/27/2018 19:21:30 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.02
+OBJECT MODULE PLACED IN source.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE source.a SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Comandare in faza a unui tiristor pentru a efectua
+                       2     ;redresare monoalternanta
+                       3     ;Bejdak Martina, Balanescu Adrian, Chirap Andrei - E115
+                       4             
+0000                   5             ORG 0000H
+                       6     
+                       7             END
+A51 MACRO ASSEMBLER  SOURCE                                                               11/27/2018 19:21:30 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

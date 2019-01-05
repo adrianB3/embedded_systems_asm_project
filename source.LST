@@ -1,9 +1,9 @@
-A51 MACRO ASSEMBLER  SOURCE                                                               11/27/2018 19:21:30 PAGE     1
+A51 MACRO ASSEMBLER  SOURCE                                                               01/05/2019 18:23:18 PAGE     1
 
 
 MACRO ASSEMBLER A51 V7.02
 OBJECT MODULE PLACED IN source.OBJ
-ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE source.a SET(SMALL) DEBUG EP
+ASSEMBLER INVOKED BY: D:\ProgramFiles\C51\BIN\A51.EXE source.a SET(SMALL) DEBUG EP
 
 LOC  OBJ            LINE     SOURCE
 
@@ -12,9 +12,54 @@ LOC  OBJ            LINE     SOURCE
                        3     ;Bejdak Martina, Balanescu Adrian, Chirap Andrei - E115
                        4             
 0000                   5             ORG 0000H
-                       6     
-                       7             END
-A51 MACRO ASSEMBLER  SOURCE                                                               11/27/2018 19:21:30 PAGE     2
+0000 801B              6             SJMP PP
+000B                   7             ORG 000BH
+000B 802D              8             SJMP TIM0
+001B                   9             ORG 001BH
+001B 8033             10             SJMP TIM1
+                      11     
+001D 1121             12     PP:     ACALL INIT      ;apelare subrutina de initializare
+001F 80FE             13             SJMP $          ;bucla de asteptare
+                      14     
+0021 C2AF             15     INIT:   CLR EA          ;dezactivare globala a intreruperilor
+0023 758911           16             MOV TMOD, #11H  ;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizato
+                             r cu declansare soft
+                      17     
+0026 758A9B           18             MOV TL0, #9BH   ;LSB pentru Talfa contorizat de timer0
+0029 758CFF           19             MOV TH0, #0FFH  ;MSB pentru Talfa contorizat de timer0
+                      20     
+002C 758BDF           21             MOV TL1, #0DFH  ;LSB pentru T contorizat de timer1
+002F 758DB1           22             MOV TH1, #0B1H  ;MSB pentru T contorizat de timer1
+                      23             
+0032 7800             24             MOV R0, #0      ;contor stare timer1
+                      25     
+0034 D28C             26             SETB TR0        ;pornire timer0
+0036 D28E             27             SETB TR1        ;pornire timer1
+                      28     
+0038 D2AF             29             SETB EA         ;activare globala intreruperi
+                      30             
+003A C28C             31     TIM0:   CLR TR0         ;dezactivare timer0
+003C B80104           32             CJNE R0, #1, state0
+003F C291             33     state1: CLR P1.1        ;dezactivare impuls pentru tiristor
+0041 7800             34             MOV R0, #0
+                      35     
+0043 D291             36     state0: SETB P1.1       ;activare impuls pentru tiristor
+0045 758A17           37             MOV TL0, #17H   ;LSB pentru Ti contorizat de timer0
+0048 758CFC           38             MOV TH0, #0FCH  ;MSB pentru Ti contorizat de timer0
+004B D28C             39             SETB TR0        ;pornire contorizare Ti 
+004D 7801             40             MOV R0, #1
+                      41     
+004F 32               42             RETI
+                      43     
+0050 758A9B           44     TIM1:   MOV TL0, #9BH   ;LSB pentru Talfa contorizat de timer0
+0053 758CFF           45             MOV TH0, #0FFH  ;MSB pentru Talfa contorizat de timer0
+0056 7800             46             MOV R0, #0      ;contor stare timer1
+0058 D28C             47             SETB TR0        ;pornire timer0
+                      48     
+005A 32               49             RETI
+                      50     
+                      51             END
+A51 MACRO ASSEMBLER  SOURCE                                                               01/05/2019 18:23:18 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -22,6 +67,21 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+INIT . . . . . . .  C ADDR   0021H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PP . . . . . . . .  C ADDR   001DH   A   
+STATE0 . . . . . .  C ADDR   0043H   A   
+STATE1 . . . . . .  C ADDR   003FH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TIM0 . . . . . . .  C ADDR   003AH   A   
+TIM1 . . . . . . .  C ADDR   0050H   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
 
 
 REGISTER BANK(S) USED: 0 

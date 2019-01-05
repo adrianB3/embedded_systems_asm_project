@@ -1,0 +1,39 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Adrian Balanescu\Documents\dev\embedded_systems_asm_project\redresor.uv2
+Project File Date:  01/05/2019
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling source.a...
+linking...
+Program Size: data=8.0 xdata=0 code=0
+"redresor" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling source.a...
+source.a(19): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(21): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(22): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(38): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(45): error A45: UNDEFINED SYMBOL (PASS-2)
+Target not created
+Build target 'Target 1'
+assembling source.a...
+source.a(19): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(21): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(22): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(38): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(45): error A45: UNDEFINED SYMBOL (PASS-2)
+Target not created
+Build target 'Target 1'
+assembling source.a...
+source.a(45): error A45: UNDEFINED SYMBOL (PASS-2)
+Target not created
+Build target 'Target 1'
+assembling source.a...
+linking...
+Program Size: data=8.0 xdata=0 code=91
+"redresor" - 0 Error(s), 0 Warning(s).

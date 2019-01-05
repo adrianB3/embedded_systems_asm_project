@@ -3,5 +3,51 @@
 ;Bejdak Martina, Balanescu Adrian, Chirap Andrei - E115
 	
 	ORG 0000H
+	SJMP PP
+	ORG 000BH
+	SJMP TIM0
+	ORG 001BH
+	SJMP TIM1
+
+PP:	ACALL INIT	;apelare subrutina de initializare
+ 	SJMP $		;bucla de asteptare
+
+INIT:	CLR EA		;dezactivare globala a intreruperilor
+	MOV TMOD, #11H	;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizator cu declansare soft
+
+	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0
+	MOV TH0, #0FFH	;MSB pentru Talfa contorizat de timer0
+
+	MOV TL1, #0DFH	;LSB pentru T contorizat de timer1
+	MOV TH1, #0B1H	;MSB pentru T contorizat de timer1
+	
+	MOV R0, #0	;contor stare timer1
+
+	SETB TR0	;pornire timer0
+	SETB TR1	;pornire timer1
+
+	SETB EA		;activare globala intreruperi
+	
+
+
+TIM1:	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0
+	MOV TH0, #0FFH	;MSB pentru Talfa contorizat de timer0
+	MOV R0, #0	;contor stare timer1
+	SETB TR0	;pornire timer0
+
+	RETI
+
+TIM0:	CLR TR0		;dezactivare timer0
+	CJNE R0, #1, state0
+state1:	CLR P1.1	;dezactivare impuls pentru tiristor
+	MOV R0, #0
+
+state0:	SETB P1.1	;activare impuls pentru tiristor
+	MOV TL0, #17H	;LSB pentru Ti contorizat de timer0
+	MOV TH0, #0FCH	;MSB pentru Ti contorizat de timer0
+	SETB TR0	;pornire contorizare Ti 
+	MOV R0, #1
+
+	RETI
 
 	END

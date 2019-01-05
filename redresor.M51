@@ -1,0 +1,87 @@
+BL51 BANKED LINKER/LOCATER V5.02                                                        01/05/2019  18:23:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.02, INVOKED BY:
+D:\PROGRAMFILES\C51\BIN\BL51.EXE source.obj TO redresor
+
+
+INPUT MODULES INCLUDED:
+  source.obj (SOURCE)
+
+
+LINK MAP OF MODULE:  redresor (SOURCE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     005BH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  redresor (SOURCE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SOURCE
+  B:00A8H.7       SYMBOL        EA
+  C:0021H         SYMBOL        INIT
+  D:0090H         SYMBOL        P1
+  C:001DH         SYMBOL        PP
+  C:0043H         SYMBOL        STATE0
+  C:003FH         SYMBOL        STATE1
+  D:008CH         SYMBOL        TH0
+  D:008DH         SYMBOL        TH1
+  C:003AH         SYMBOL        TIM0
+  C:0050H         SYMBOL        TIM1
+  D:008AH         SYMBOL        TL0
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         6
+  C:000BH         LINE#         8
+  C:001BH         LINE#         10
+  C:001DH         LINE#         12
+  C:001FH         LINE#         13
+  C:0021H         LINE#         15
+  C:0023H         LINE#         16
+  C:0026H         LINE#         18
+  C:0029H         LINE#         19
+  C:002CH         LINE#         21
+  C:002FH         LINE#         22
+  C:0032H         LINE#         24
+  C:0034H         LINE#         26
+  C:0036H         LINE#         27
+  C:0038H         LINE#         29
+BL51 BANKED LINKER/LOCATER V5.02                                                      01/05/2019  18:23:19  PAGE 2
+
+
+  C:003AH         LINE#         31
+  C:003CH         LINE#         32
+  C:003FH         LINE#         33
+  C:0041H         LINE#         34
+  C:0043H         LINE#         36
+  C:0045H         LINE#         37
+  C:0048H         LINE#         38
+  C:004BH         LINE#         39
+  C:004DH         LINE#         40
+  C:004FH         LINE#         42
+  C:0050H         LINE#         44
+  C:0053H         LINE#         45
+  C:0056H         LINE#         46
+  C:0058H         LINE#         47
+  C:005AH         LINE#         49
+  -------         ENDMOD        SOURCE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0047H BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=91
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  SOURCE                                                               01/05/2019 18:23:18 PAGE     1
+A51 MACRO ASSEMBLER  SOURCE                                                               01/06/2019 13:07:52 PAGE     1
 
 
 MACRO ASSEMBLER A51 V7.02
@@ -14,9 +14,9 @@ LOC  OBJ            LINE     SOURCE
 0000                   5             ORG 0000H
 0000 801B              6             SJMP PP
 000B                   7             ORG 000BH
-000B 802D              8             SJMP TIM0
+000B 8035              8             SJMP TIM0
 001B                   9             ORG 001BH
-001B 8033             10             SJMP TIM1
+001B 802E             10             SJMP TIM1
                       11     
 001D 1121             12     PP:     ACALL INIT      ;apelare subrutina de initializare
 001F 80FE             13             SJMP $          ;bucla de asteptare
@@ -33,33 +33,53 @@ LOC  OBJ            LINE     SOURCE
                       23             
 0032 7800             24             MOV R0, #0      ;contor stare timer1
                       25     
-0034 D28C             26             SETB TR0        ;pornire timer0
-0036 D28E             27             SETB TR1        ;pornire timer1
-                      28     
-0038 D2AF             29             SETB EA         ;activare globala intreruperi
-                      30             
-003A C28C             31     TIM0:   CLR TR0         ;dezactivare timer0
-003C B80104           32             CJNE R0, #1, state0
-003F C291             33     state1: CLR P1.1        ;dezactivare impuls pentru tiristor
-0041 7800             34             MOV R0, #0
+0034 D2A9             26             SETB ET0
+0036 D2AB             27             SETB ET1
+0038 759000           28             MOV P1, #0000H
+003B D28C             29             SETB TR0        ;pornire timer0
+003D D28E             30             SETB TR1        ;pornire timer1
+                      31     
+003F D2AF             32             SETB EA         ;activare globala intreruperi
+0041 22               33             RET
+                      34             
                       35     
-0043 D291             36     state0: SETB P1.1       ;activare impuls pentru tiristor
-0045 758A17           37             MOV TL0, #17H   ;LSB pentru Ti contorizat de timer0
-0048 758CFC           38             MOV TH0, #0FCH  ;MSB pentru Ti contorizat de timer0
-004B D28C             39             SETB TR0        ;pornire contorizare Ti 
-004D 7801             40             MOV R0, #1
-                      41     
-004F 32               42             RETI
-                      43     
-0050 758A9B           44     TIM1:   MOV TL0, #9BH   ;LSB pentru Talfa contorizat de timer0
-0053 758CFF           45             MOV TH0, #0FFH  ;MSB pentru Talfa contorizat de timer0
-0056 7800             46             MOV R0, #0      ;contor stare timer1
-0058 D28C             47             SETB TR0        ;pornire timer0
-                      48     
-005A 32               49             RETI
-                      50     
-                      51             END
-A51 MACRO ASSEMBLER  SOURCE                                                               01/05/2019 18:23:18 PAGE     2
+0042 C28C             36     TIM0:   CLR TR0         ;dezactivare timer0
+0044 B80017           37             CJNE R0, #0, state1
+0047 B80119           38             CJNE R0, #1, state0
+004A 32               39             RETI
+                      40     
+004B 758A9B           41     TIM1:   MOV TL0, #9BH   ;LSB pentru Talfa contorizat de timer0
+004E 758CFF           42             MOV TH0, #0FFH  ;MSB pentru Talfa contorizat de timer0
+                      43             
+0051 758BDE           44             MOV TL1, #0DEH  ;LSB pentru T contorizat de timer1
+0054 758DB1           45             MOV TH1, #0B1H  ;MSB pentru T contorizat de timer1
+                      46     
+0057 7800             47             MOV R0, #0      ;contor stare timer1
+                      48             
+0059 D28C             49             SETB TR0        ;pornire timer0
+005B D28E             50             SETB TR1        ;pornire timer1
+                      51     
+005D 32               52             RETI
+                      53     
+                      54     
+005E C291             55     state1: CLR P1.1        ;dezactivare impuls pentru tiristor
+0060 7800             56             MOV R0, #0
+                      57     
+A51 MACRO ASSEMBLER  SOURCE                                                               01/06/2019 13:07:52 PAGE     2
+
+0062 32               58             RETI
+                      59             
+                      60             
+0063 D291             61     state0: SETB P1.1       ;activare impuls pentru tiristor
+0065 758A17           62             MOV TL0, #17H   ;LSB pentru Ti contorizat de timer0
+0068 758CFC           63             MOV TH0, #0FCH  ;MSB pentru Ti contorizat de timer0
+006B D28C             64             SETB TR0        ;pornire contorizare Ti 
+006D 7801             65             MOV R0, #1
+                      66             
+006F 32               67             RETI
+                      68     
+                      69             END
+A51 MACRO ASSEMBLER  SOURCE                                                               01/06/2019 13:07:52 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -68,15 +88,17 @@ SYMBOL TABLE LISTING
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
 EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
 INIT . . . . . . .  C ADDR   0021H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 PP . . . . . . . .  C ADDR   001DH   A   
-STATE0 . . . . . .  C ADDR   0043H   A   
-STATE1 . . . . . .  C ADDR   003FH   A   
+STATE0 . . . . . .  C ADDR   0063H   A   
+STATE1 . . . . . .  C ADDR   005EH   A   
 TH0. . . . . . . .  D ADDR   008CH   A   
 TH1. . . . . . . .  D ADDR   008DH   A   
-TIM0 . . . . . . .  C ADDR   003AH   A   
-TIM1 . . . . . . .  C ADDR   0050H   A   
+TIM0 . . . . . . .  C ADDR   0042H   A   
+TIM1 . . . . . . .  C ADDR   004BH   A   
 TL0. . . . . . . .  D ADDR   008AH   A   
 TL1. . . . . . . .  D ADDR   008BH   A   
 TMOD . . . . . . .  D ADDR   0089H   A   

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V5.02                                                        01/05/2019  18:23:19  PAGE 1
+BL51 BANKED LINKER/LOCATER V5.02                                                        01/06/2019  13:07:52  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V5.02, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  redresor (SOURCE)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     005BH     ABSOLUTE     
+            CODE    0000H     0070H     ABSOLUTE     
 
 
 
@@ -30,15 +30,17 @@ SYMBOL TABLE OF MODULE:  redresor (SOURCE)
 
   -------         MODULE        SOURCE
   B:00A8H.7       SYMBOL        EA
+  B:00A8H.1       SYMBOL        ET0
+  B:00A8H.3       SYMBOL        ET1
   C:0021H         SYMBOL        INIT
   D:0090H         SYMBOL        P1
   C:001DH         SYMBOL        PP
-  C:0043H         SYMBOL        STATE0
-  C:003FH         SYMBOL        STATE1
+  C:0063H         SYMBOL        STATE0
+  C:005EH         SYMBOL        STATE1
   D:008CH         SYMBOL        TH0
   D:008DH         SYMBOL        TH1
-  C:003AH         SYMBOL        TIM0
-  C:0050H         SYMBOL        TIM1
+  C:0042H         SYMBOL        TIM0
+  C:004BH         SYMBOL        TIM1
   D:008AH         SYMBOL        TL0
   D:008BH         SYMBOL        TL1
   D:0089H         SYMBOL        TMOD
@@ -57,31 +59,41 @@ SYMBOL TABLE OF MODULE:  redresor (SOURCE)
   C:002FH         LINE#         22
   C:0032H         LINE#         24
   C:0034H         LINE#         26
+BL51 BANKED LINKER/LOCATER V5.02                                                      01/06/2019  13:07:52  PAGE 2
+
+
   C:0036H         LINE#         27
-  C:0038H         LINE#         29
-BL51 BANKED LINKER/LOCATER V5.02                                                      01/05/2019  18:23:19  PAGE 2
-
-
-  C:003AH         LINE#         31
-  C:003CH         LINE#         32
-  C:003FH         LINE#         33
-  C:0041H         LINE#         34
-  C:0043H         LINE#         36
-  C:0045H         LINE#         37
-  C:0048H         LINE#         38
-  C:004BH         LINE#         39
-  C:004DH         LINE#         40
-  C:004FH         LINE#         42
-  C:0050H         LINE#         44
-  C:0053H         LINE#         45
-  C:0056H         LINE#         46
-  C:0058H         LINE#         47
-  C:005AH         LINE#         49
+  C:0038H         LINE#         28
+  C:003BH         LINE#         29
+  C:003DH         LINE#         30
+  C:003FH         LINE#         32
+  C:0041H         LINE#         33
+  C:0042H         LINE#         36
+  C:0044H         LINE#         37
+  C:0047H         LINE#         38
+  C:004AH         LINE#         39
+  C:004BH         LINE#         41
+  C:004EH         LINE#         42
+  C:0051H         LINE#         44
+  C:0054H         LINE#         45
+  C:0057H         LINE#         47
+  C:0059H         LINE#         49
+  C:005BH         LINE#         50
+  C:005DH         LINE#         52
+  C:005EH         LINE#         55
+  C:0060H         LINE#         56
+  C:0062H         LINE#         58
+  C:0063H         LINE#         61
+  C:0065H         LINE#         62
+  C:0068H         LINE#         63
+  C:006BH         LINE#         64
+  C:006DH         LINE#         65
+  C:006FH         LINE#         67
   -------         ENDMOD        SOURCE
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0047H BYTE ( 3%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 005CH BYTE ( 4%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=91
+Program Size: data=8.0 xdata=0 code=112
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

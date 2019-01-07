@@ -10,7 +10,8 @@
 	ORG 001BH
 	SJMP TIM1
 
-PP:	ACALL INIT	;apelare subrutina de initializare
+	ORG 100H
+MAIN:	ACALL INIT	;apelare subrutina de initializare
  	SJMP $		;bucla de asteptare
 
 INIT:	CLR EA		;dezactivare globala a intreruperilor
@@ -34,11 +35,13 @@ INIT:	CLR EA		;dezactivare globala a intreruperilor
 	RET
 	
 
+	ORG 250H
 TIM0:	CLR TR0		;dezactivare timer0
 	CJNE R0, #0, state1
 	CJNE R0, #1, state0
 	RETI
 
+	ORG 300H
 TIM1:	CLR TR0
 	CLR TR1
 	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0
@@ -55,12 +58,13 @@ TIM1:	CLR TR0
 	RETI
 
 
+	ORG 400H
 state1:	CLR P1.1	;dezactivare impuls pentru tiristor
 	MOV R0, #0
 
 	RETI
 	
-	
+	ORG 500H
 state0:	SETB P1.1	;activare impuls pentru tiristor
 	MOV TL0, #17H	;LSB pentru Ti contorizat de timer0
 	MOV TH0, #0FCH	;MSB pentru Ti contorizat de timer0

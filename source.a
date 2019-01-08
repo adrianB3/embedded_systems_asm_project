@@ -25,26 +25,41 @@ INIT:	CLR EA		;dezactivare globala a intreruperilor
 	
 	MOV R0, #0	;contor stare timer1
 
-	SETB ET0
-	SETB ET1
-	MOV P1, #0000H
+	SETB ET0	;validare intrerupere timer0
+	SETB ET1	;validare intrerupere timer1
+
+	MOV P1, #0H	;initializare port0 cu valoarea 0
+
 	SETB TR0	;pornire timer0
 	SETB TR1	;pornire timer1
 
 	SETB EA		;activare globala intreruperi
 	RET
-	
 
 	ORG 250H
 TIM0:	CLR TR0		;dezactivare timer0
 	CJNE R0, #0, state1
 	CJNE R0, #1, state0
 	RETI
+	
+state0:	SETB P1.1	;activare impuls pentru tiristor
+	MOV TL0, #17H	;LSB pentru Timpuls contorizat de timer0, Timpuls = 1ms
+	MOV TH0, #0FCH	;MSB pentru Timpuls contorizat de timer0
+	SETB TR0	;pornire contorizare Ti 
+	MOV R0, #1
+	
+	RETI
+
+state1:	CLR P1.1	;dezactivare impuls pentru tiristor
+	MOV R0, #0
+
+	RETI
+	
 
 	ORG 300H
 TIM1:	CLR TR0
 	CLR TR1
-	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0
+	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0, Talfa = 0.1ms
 	MOV TH0, #0FFH	;MSB pentru Talfa contorizat de timer0
 	
         MOV TL1, #0DEH	;LSB pentru T contorizat de timer1
@@ -57,20 +72,5 @@ TIM1:	CLR TR0
 
 	RETI
 
-
-	ORG 400H
-state1:	CLR P1.1	;dezactivare impuls pentru tiristor
-	MOV R0, #0
-
-	RETI
-	
-	ORG 500H
-state0:	SETB P1.1	;activare impuls pentru tiristor
-	MOV TL0, #17H	;LSB pentru Ti contorizat de timer0
-	MOV TH0, #0FCH	;MSB pentru Ti contorizat de timer0
-	SETB TR0	;pornire contorizare Ti 
-	MOV R0, #1
-	
-	RETI
 
 	END

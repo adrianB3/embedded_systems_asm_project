@@ -5,10 +5,10 @@
 	
 	ORG 0000H
 	LJMP MAIN
-	ORG 000BH
+	ORG 000BH	;adresa intrerupere timer0
 	LJMP TIM0
 	ORG 001BH
-	LJMP TIM1
+	LJMP TIM1	;adresa intrerupere timer1
 
 	ORG 100H
 MAIN:	;--testing

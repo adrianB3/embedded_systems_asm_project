@@ -14,7 +14,7 @@ Target (Target 1), 0x0000 // Tools: 'MCS-51'
 GRPOPT 1,(Source Group 1),1,0,0
 
 OPTFFF 1,1,0,0,0,0,0,0,<C:\Users\Adrian Balanescu\Documents\dev\embedded_systems_asm_project\STARTUP.A51><STARTUP.A51> 
-OPTFFF 1,2,2,2,0,1,27,0,<.\source.a><source.a> { 44,0,0,0,2,0,0,0,3,0,0,0,255,255,255,255,255,255,255,255,248,255,255,255,225,255,255,255,0,0,0,0,0,0,0,0,22,4,0,0,70,1,0,0 }
+OPTFFF 1,2,2,1073741826,0,1,23,0,<.\source.a><source.a> { 44,0,0,0,2,0,0,0,3,0,0,0,255,255,255,255,255,255,255,255,248,255,255,255,225,255,255,255,0,0,0,0,0,0,0,0,22,4,0,0,70,1,0,0 }
 
 
 TARGOPT 1, (Target 1)

@@ -7,3 +7,73 @@ C:\Users\Adrian Balanescu\Documents\dev\embedded_systems_asm_project\redresor.uv
 Project File Date:  01/05/2019
 
 <h2>Output:</h2>
+Build target 'Target 1'
+assembling source.a...
+source.a(7): error A45: UNDEFINED SYMBOL (PASS-2)
+source.a(9): error A51: TARGET OUT OF RANGE
+source.a(11): error A51: TARGET OUT OF RANGE
+source.a(16): error A39: REGISTER OPERAND EXPECTED
+Target not created
+Build target 'Target 1'
+assembling source.a...
+source.a(7): error A51: TARGET OUT OF RANGE
+source.a(9): error A51: TARGET OUT OF RANGE
+source.a(11): error A51: TARGET OUT OF RANGE
+source.a(16): error A39: REGISTER OPERAND EXPECTED
+Target not created
+Build target 'Target 1'
+assembling source.a...
+source.a(7): error A51: TARGET OUT OF RANGE
+source.a(9): error A51: TARGET OUT OF RANGE
+source.a(11): error A51: TARGET OUT OF RANGE
+source.a(16): error A39: REGISTER OPERAND EXPECTED
+Target not created
+Build target 'Target 1'
+assembling source.a...
+source.a(16): error A39: REGISTER OPERAND EXPECTED
+Target not created
+Build target 'Target 1'
+assembling source.a...
+linking...
+Program Size: data=8.0 xdata=0 code=791
+"redresor" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling source.a...
+source.a(58): error A45: UNDEFINED SYMBOL (PASS-2)
+compiling if.c...
+IF.C(2): error C202: 'R1': undefined identifier
+IF.C(2): error C141: syntax error near '>'
+IF.C(3): error C202: 'R1': undefined identifier
+Target not created
+Build target 'Target 1'
+assembling source.a...
+source.a(58): error A45: UNDEFINED SYMBOL (PASS-2)
+compiling if.c...
+IF.C(3): error C141: syntax error near '>'
+Target not created
+Build target 'Target 1'
+assembling source.a...
+compiling if.c...
+IF.C(3): error C141: syntax error near '>'
+Target not created
+Build target 'Target 1'
+compiling if.c...
+linking...
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      0316H
+Program Size: data=9.0 xdata=0 code=831
+"redresor" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=9.0 xdata=0 code=40
+"redresor" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling source.a...
+source.a(69): error A8: ATTEMPT TO DEFINE AN ALREADY DEFINED LABEL
+Target not created
+Build target 'Target 1'
+assembling source.a...
+linking...
+Program Size: data=8.0 xdata=0 code=791
+"redresor" - 0 Error(s), 0 Warning(s).

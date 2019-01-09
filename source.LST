@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  SOURCE                                                               01/06/2019 13:07:52 PAGE     1
+A51 MACRO ASSEMBLER  SOURCE                                                               01/09/2019 17:22:35 PAGE     1
 
 
 MACRO ASSEMBLER A51 V7.02
@@ -10,76 +10,124 @@ LOC  OBJ            LINE     SOURCE
                        1     ;Comandare in faza a unui tiristor pentru a efectua
                        2     ;redresare monoalternanta
                        3     ;Bejdak Martina, Balanescu Adrian, Chirap Andrei - E115
-                       4             
-0000                   5             ORG 0000H
-0000 801B              6             SJMP PP
-000B                   7             ORG 000BH
-000B 8035              8             SJMP TIM0
-001B                   9             ORG 001BH
-001B 802E             10             SJMP TIM1
-                      11     
-001D 1121             12     PP:     ACALL INIT      ;apelare subrutina de initializare
-001F 80FE             13             SJMP $          ;bucla de asteptare
-                      14     
-0021 C2AF             15     INIT:   CLR EA          ;dezactivare globala a intreruperilor
-0023 758911           16             MOV TMOD, #11H  ;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizato
+                       4     ;Programul functioneaza
+                       5             
+0000                   6             ORG 0000H
+0000 020100            7             LJMP MAIN
+000B                   8             ORG 000BH
+000B 020250            9             LJMP TIM0
+001B                  10             ORG 001BH
+001B 020300           11             LJMP TIM1
+                      12     
+0100                  13             ORG 100H
+0100                  14     MAIN:   ;--testing
+0100 901000           15             MOV DPTR, #1000h;populare valori la adresa 1000h pentru testare aplicatie
+0103 7401             16             MOV A, #1h;
+0105 F0               17             MOVX @DPTR, A   ; Talfa = 1ms
+                      18             ;--testing
+                      19     
+0106 3150             20             ACALL INIT      ;apelare subrutina de initializare
+0108 80FE             21             SJMP $          ;bucla de asteptare
+                      22             
+0150                  23             ORG 150h
+0150 C2AF             24     INIT:   CLR EA          ;dezactivare globala a intreruperilor
+0152 758911           25             MOV TMOD, #11H  ;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizato
                              r cu declansare soft
-                      17     
-0026 758A9B           18             MOV TL0, #9BH   ;LSB pentru Talfa contorizat de timer0
-0029 758CFF           19             MOV TH0, #0FFH  ;MSB pentru Talfa contorizat de timer0
-                      20     
-002C 758BDF           21             MOV TL1, #0DFH  ;LSB pentru T contorizat de timer1
-002F 758DB1           22             MOV TH1, #0B1H  ;MSB pentru T contorizat de timer1
-                      23             
-0032 7800             24             MOV R0, #0      ;contor stare timer1
-                      25     
-0034 D2A9             26             SETB ET0
-0036 D2AB             27             SETB ET1
-0038 759000           28             MOV P1, #0000H
-003B D28C             29             SETB TR0        ;pornire timer0
-003D D28E             30             SETB TR1        ;pornire timer1
-                      31     
-003F D2AF             32             SETB EA         ;activare globala intreruperi
-0041 22               33             RET
-                      34             
+                      26             
+0155 5100             27             ACALL getTa;    ;incarcare valoare Talfa in R2 si R3
+0157 8A8A             28             MOV TL0, R2     ;LSB pentru Talfa contorizat de timer0 #9BH
+0159 8B8C             29             MOV TH0, R3     ;MSB pentru Talfa contorizat de timer0 #0FFH
+                      30     
+015B 758BDF           31             MOV TL1, #0DFH  ;LSB pentru T contorizat de timer1
+015E 758DB1           32             MOV TH1, #0B1H  ;MSB pentru T contorizat de timer1
+                      33             
+0161 7800             34             MOV R0, #0      ;contor stare timer1
                       35     
-0042 C28C             36     TIM0:   CLR TR0         ;dezactivare timer0
-0044 B80017           37             CJNE R0, #0, state1
-0047 B80119           38             CJNE R0, #1, state0
-004A 32               39             RETI
+0163 D2A9             36             SETB ET0        ;validare intrerupere timer0
+0165 D2AB             37             SETB ET1        ;validare intrerupere timer1
+                      38     
+0167 759000           39             MOV P1, #0H     ;initializare port0 cu valoarea 0
                       40     
-004B 758A9B           41     TIM1:   MOV TL0, #9BH   ;LSB pentru Talfa contorizat de timer0
-004E 758CFF           42             MOV TH0, #0FFH  ;MSB pentru Talfa contorizat de timer0
-                      43             
-0051 758BDE           44             MOV TL1, #0DEH  ;LSB pentru T contorizat de timer1
-0054 758DB1           45             MOV TH1, #0B1H  ;MSB pentru T contorizat de timer1
+016A D28C             41             SETB TR0        ;pornire timer0
+016C D28E             42             SETB TR1        ;pornire timer1
+                      43     
+016E D2AF             44             SETB EA         ;activare globala intreruperi
+0170 22               45             RET
                       46     
-0057 7800             47             MOV R0, #0      ;contor stare timer1
-                      48             
-0059 D28C             49             SETB TR0        ;pornire timer0
-005B D28E             50             SETB TR1        ;pornire timer1
-                      51     
-005D 32               52             RETI
+0200                  47             ORG 200h
+0200                  48     getTa:  ;citire Talfa din memoria externa de la adresa 1000h in R1      
+0200 901000           49             MOV DPTR, #1000h
+0203 E0               50             MOVX A, @DPTR
+0204 F9               51             MOV R1, A       ;R1 = Talfa
+                      52             ;end citire din mem externa
                       53     
-                      54     
-005E C291             55     state1: CLR P1.1        ;dezactivare impuls pentru tiristor
-0060 7800             56             MOV R0, #0
-                      57     
-A51 MACRO ASSEMBLER  SOURCE                                                               01/06/2019 13:07:52 PAGE     2
+                      54             ;verificare limite Talfa 1--9ms TODO
+                      55             ; if Talfa >= limita inferioara -> ok else Talfa = Talfaminim
+                      56             ; if Talfa <= limita superioara -> ok else Talfa = Talfamaxim
+0205 B90100           57             CJNE R1, #1, NotEq
+A51 MACRO ASSEMBLER  SOURCE                                                               01/09/2019 17:22:35 PAGE     2
 
-0062 32               58             RETI
-                      59             
-                      60             
-0063 D291             61     state0: SETB P1.1       ;activare impuls pentru tiristor
-0065 758A17           62             MOV TL0, #17H   ;LSB pentru Ti contorizat de timer0
-0068 758CFC           63             MOV TH0, #0FCH  ;MSB pentru Ti contorizat de timer0
-006B D28C             64             SETB TR0        ;pornire contorizare Ti 
-006D 7801             65             MOV R0, #1
-                      66             
-006F 32               67             RETI
+                      58     
+0208 4000             59     NotEq:  JC less
+                      60     
+020A 7901             61     less:   MOV R1, #1      
+                      62     
+020C B90900           63     great:  CJNE R1, #9, NotEq1
+                      64     
+020F 4000             65     NotEq1: JC less1
+                      66     
+0211                  67     less1:  
                       68     
-                      69             END
-A51 MACRO ASSEMBLER  SOURCE                                                               01/06/2019 13:07:52 PAGE     3
+0211 7909             69     great1: MOV R1, #9
+                      70             
+                      71             ;end verificare
+                      72     
+                      73             ;transformare Talfa (1--9ms) in valori ptr TL0, TH0 -- TODO
+                      74             ; n = 65535 - Talfa * 1000
+                      75             ; R2 - lsb of n, R3 - msb of n
+                      76             ;end transformare
+0213 22               77             RET
+                      78     
+0250                  79             ORG 250H
+0250 C28C             80     TIM0:   CLR TR0         ;dezactivare timer0
+0252 B80011           81             CJNE R0, #0, state1
+0255 B80101           82             CJNE R0, #1, state0
+0258 32               83             RETI
+                      84             
+0259 D291             85     state0: SETB P1.1       ;activare impuls pentru tiristor
+025B 758A17           86             MOV TL0, #17H   ;LSB pentru Timpuls contorizat de timer0, Timpuls = 1ms
+025E 758CFC           87             MOV TH0, #0FCH  ;MSB pentru Timpuls contorizat de timer0
+0261 D28C             88             SETB TR0        ;pornire contorizare Ti 
+0263 7801             89             MOV R0, #1
+                      90             
+0265 32               91             RETI
+                      92     
+0266 C291             93     state1: CLR P1.1        ;dezactivare impuls pentru tiristor
+0268 7800             94             MOV R0, #0
+                      95     
+026A 32               96             RETI
+                      97             
+                      98     
+0300                  99             ORG 300H
+0300 C28C            100     TIM1:   CLR TR0
+0302 C28E            101             CLR TR1
+                     102     
+0304 5100            103             ACALL getTa;    ;incarcare valoare Talfa in R2 si R3
+0306 8A8A            104             MOV TL0, R2     ;LSB pentru Talfa contorizat de timer0
+0308 8B8C            105             MOV TH0, R3     ;MSB pentru Talfa contorizat de timer0
+                     106             
+030A 758BDE          107             MOV TL1, #0DEH  ;LSB pentru T contorizat de timer1, 20ms
+030D 758DB1          108             MOV TH1, #0B1H  ;MSB pentru T contorizat de timer1
+                     109     
+0310 7800            110             MOV R0, #0      ;contor stare timer1
+                     111             
+0312 D28C            112             SETB TR0        ;pornire timer0
+0314 D28E            113             SETB TR1        ;pornire timer1
+                     114     
+0316 32              115             RETI
+                     116     
+                     117             END
+A51 MACRO ASSEMBLER  SOURCE                                                               01/09/2019 17:22:35 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -90,15 +138,22 @@ N A M E             T Y P E  V A L U E   ATTRIBUTES
 EA . . . . . . . .  B ADDR   00A8H.7 A   
 ET0. . . . . . . .  B ADDR   00A8H.1 A   
 ET1. . . . . . . .  B ADDR   00A8H.3 A   
-INIT . . . . . . .  C ADDR   0021H   A   
+GETTA. . . . . . .  C ADDR   0200H   A   
+GREAT. . . . . . .  C ADDR   020CH   A   
+GREAT1 . . . . . .  C ADDR   0211H   A   
+INIT . . . . . . .  C ADDR   0150H   A   
+LESS . . . . . . .  C ADDR   020AH   A   
+LESS1. . . . . . .  C ADDR   0211H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NOTEQ. . . . . . .  C ADDR   0208H   A   
+NOTEQ1 . . . . . .  C ADDR   020FH   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
-PP . . . . . . . .  C ADDR   001DH   A   
-STATE0 . . . . . .  C ADDR   0063H   A   
-STATE1 . . . . . .  C ADDR   005EH   A   
+STATE0 . . . . . .  C ADDR   0259H   A   
+STATE1 . . . . . .  C ADDR   0266H   A   
 TH0. . . . . . . .  D ADDR   008CH   A   
 TH1. . . . . . . .  D ADDR   008DH   A   
-TIM0 . . . . . . .  C ADDR   0042H   A   
-TIM1 . . . . . . .  C ADDR   004BH   A   
+TIM0 . . . . . . .  C ADDR   0250H   A   
+TIM1 . . . . . . .  C ADDR   0300H   A   
 TL0. . . . . . . .  D ADDR   008AH   A   
 TL1. . . . . . . .  D ADDR   008BH   A   
 TMOD . . . . . . .  D ADDR   0089H   A   

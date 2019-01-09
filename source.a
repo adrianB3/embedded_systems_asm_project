@@ -4,37 +4,29 @@
 ;Programul functioneaza
 	
 	ORG 0000H
-	SJMP PP
+	LJMP MAIN
 	ORG 000BH
-	SJMP TIM0
+	LJMP TIM0
 	ORG 001BH
-	SJMP TIM1
+	LJMP TIM1
 
 	ORG 100H
-MAIN:	ACALL INIT	;apelare subrutina de initializare
- 	SJMP $		;bucla de asteptare
+MAIN:	;--testing
+	MOV DPTR, #1000h;populare valori la adresa 1000h pentru testare aplicatie
+	MOV A, #1h;
+	MOVX @DPTR, A	; Talfa = 1ms
+	;--testing
 
+	ACALL INIT	;apelare subrutina de initializare
+ 	SJMP $		;bucla de asteptare
+	
+	ORG 150h
 INIT:	CLR EA		;dezactivare globala a intreruperilor
 	MOV TMOD, #11H	;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizator cu declansare soft
-
-	;citire Talfa din memoria externa de la adresa 300h in R1
 	
-	MOV DPTR, #300H
-	MOVX R1, @DPTR	; R1 = Talfa
-	
-	;end citire din mem externa
-
-	;verificare limite Talfa 1--9ms TODO
-	; if Talfa >= limita inferioara -> ok else Talfa = Talfaminim
-	; if Talfa <= limita superioara -> ok else Talfa = Talfamaxim
-	;end verificare
-
-	;transformare Talfa (1--9ms) in valori ptr TL0, TH0 -- TODO
-	; n = 65535 - Talfa * 1000
-	;end transformare
-
-	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0
-	MOV TH0, #0FFH	;MSB pentru Talfa contorizat de timer0
+	ACALL getTa;	;incarcare valoare Talfa in R2 si R3
+	MOV TL0, R2	;LSB pentru Talfa contorizat de timer0 #9BH
+	MOV TH0, R3	;MSB pentru Talfa contorizat de timer0 #0FFH
 
 	MOV TL1, #0DFH	;LSB pentru T contorizat de timer1
 	MOV TH1, #0B1H	;MSB pentru T contorizat de timer1
@@ -50,6 +42,24 @@ INIT:	CLR EA		;dezactivare globala a intreruperilor
 	SETB TR1	;pornire timer1
 
 	SETB EA		;activare globala intreruperi
+	RET
+
+	ORG 200h
+getTa:	;citire Talfa din memoria externa de la adresa 1000h in R1	
+	MOV DPTR, #1000h
+	MOVX A, @DPTR
+	MOV R1, A	;R1 = Talfa
+	;end citire din mem externa
+
+	;verificare limite Talfa 1--9ms TODO
+	; if Talfa >= limita inferioara -> ok else Talfa = Talfaminim
+	; if Talfa <= limita superioara -> ok else Talfa = Talfamaxim
+	;end verificare
+
+	;transformare Talfa (1--9ms) in valori ptr TL0, TH0 -- TODO
+	; n = 65535 - Talfa * 1000
+	; R2 - lsb of n, R3 - msb of n
+	;end transformare
 	RET
 
 	ORG 250H
@@ -75,10 +85,12 @@ state1:	CLR P1.1	;dezactivare impuls pentru tiristor
 	ORG 300H
 TIM1:	CLR TR0
 	CLR TR1
-	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0, Talfa = 0.1ms
-	MOV TH0, #0FFH	;MSB pentru Talfa contorizat de timer0
+
+	ACALL getTa;	;incarcare valoare Talfa in R2 si R3
+	MOV TL0, R2	;LSB pentru Talfa contorizat de timer0
+	MOV TH0, R3 	;MSB pentru Talfa contorizat de timer0
 	
-        MOV TL1, #0DEH	;LSB pentru T contorizat de timer1
+        MOV TL1, #0DEH	;LSB pentru T contorizat de timer1, 20ms
 	MOV TH1, #0B1H	;MSB pentru T contorizat de timer1
 
 	MOV R0, #0	;contor stare timer1
@@ -87,6 +99,5 @@ TIM1:	CLR TR0
 	SETB TR1	;pornire timer1
 
 	RETI
-
 
 	END

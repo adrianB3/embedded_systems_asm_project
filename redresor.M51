@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V5.02                                                        01/06/2019  13:07:52  PAGE 1
+BL51 BANKED LINKER/LOCATER V5.02                                                        01/09/2019  17:22:35  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V5.02, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  redresor (SOURCE)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0070H     ABSOLUTE     
+            CODE    0000H     0317H     ABSOLUTE     
 
 
 
@@ -32,68 +32,95 @@ SYMBOL TABLE OF MODULE:  redresor (SOURCE)
   B:00A8H.7       SYMBOL        EA
   B:00A8H.1       SYMBOL        ET0
   B:00A8H.3       SYMBOL        ET1
-  C:0021H         SYMBOL        INIT
+  C:0200H         SYMBOL        GETTA
+  C:020CH         SYMBOL        GREAT
+  C:0211H         SYMBOL        GREAT1
+  C:0150H         SYMBOL        INIT
+  C:020AH         SYMBOL        LESS
+  C:0211H         SYMBOL        LESS1
+  C:0100H         SYMBOL        MAIN
+  C:0208H         SYMBOL        NOTEQ
+  C:020FH         SYMBOL        NOTEQ1
   D:0090H         SYMBOL        P1
-  C:001DH         SYMBOL        PP
-  C:0063H         SYMBOL        STATE0
-  C:005EH         SYMBOL        STATE1
+  C:0259H         SYMBOL        STATE0
+  C:0266H         SYMBOL        STATE1
   D:008CH         SYMBOL        TH0
   D:008DH         SYMBOL        TH1
-  C:0042H         SYMBOL        TIM0
-  C:004BH         SYMBOL        TIM1
+  C:0250H         SYMBOL        TIM0
+  C:0300H         SYMBOL        TIM1
   D:008AH         SYMBOL        TL0
   D:008BH         SYMBOL        TL1
   D:0089H         SYMBOL        TMOD
   B:0088H.4       SYMBOL        TR0
   B:0088H.6       SYMBOL        TR1
-  C:0000H         LINE#         6
-  C:000BH         LINE#         8
-  C:001BH         LINE#         10
-  C:001DH         LINE#         12
-  C:001FH         LINE#         13
-  C:0021H         LINE#         15
-  C:0023H         LINE#         16
-  C:0026H         LINE#         18
-  C:0029H         LINE#         19
-  C:002CH         LINE#         21
-  C:002FH         LINE#         22
-  C:0032H         LINE#         24
-  C:0034H         LINE#         26
-BL51 BANKED LINKER/LOCATER V5.02                                                      01/06/2019  13:07:52  PAGE 2
+  C:0000H         LINE#         7
+  C:000BH         LINE#         9
+  C:001BH         LINE#         11
+  C:0100H         LINE#         15
+  C:0103H         LINE#         16
+  C:0105H         LINE#         17
+BL51 BANKED LINKER/LOCATER V5.02                                                      01/09/2019  17:22:35  PAGE 2
 
 
-  C:0036H         LINE#         27
-  C:0038H         LINE#         28
-  C:003BH         LINE#         29
-  C:003DH         LINE#         30
-  C:003FH         LINE#         32
-  C:0041H         LINE#         33
-  C:0042H         LINE#         36
-  C:0044H         LINE#         37
-  C:0047H         LINE#         38
-  C:004AH         LINE#         39
-  C:004BH         LINE#         41
-  C:004EH         LINE#         42
-  C:0051H         LINE#         44
-  C:0054H         LINE#         45
-  C:0057H         LINE#         47
-  C:0059H         LINE#         49
-  C:005BH         LINE#         50
-  C:005DH         LINE#         52
-  C:005EH         LINE#         55
-  C:0060H         LINE#         56
-  C:0062H         LINE#         58
-  C:0063H         LINE#         61
-  C:0065H         LINE#         62
-  C:0068H         LINE#         63
-  C:006BH         LINE#         64
-  C:006DH         LINE#         65
-  C:006FH         LINE#         67
+  C:0106H         LINE#         20
+  C:0108H         LINE#         21
+  C:0150H         LINE#         24
+  C:0152H         LINE#         25
+  C:0155H         LINE#         27
+  C:0157H         LINE#         28
+  C:0159H         LINE#         29
+  C:015BH         LINE#         31
+  C:015EH         LINE#         32
+  C:0161H         LINE#         34
+  C:0163H         LINE#         36
+  C:0165H         LINE#         37
+  C:0167H         LINE#         39
+  C:016AH         LINE#         41
+  C:016CH         LINE#         42
+  C:016EH         LINE#         44
+  C:0170H         LINE#         45
+  C:0200H         LINE#         49
+  C:0203H         LINE#         50
+  C:0204H         LINE#         51
+  C:0205H         LINE#         57
+  C:0208H         LINE#         59
+  C:020AH         LINE#         61
+  C:020CH         LINE#         63
+  C:020FH         LINE#         65
+  C:0211H         LINE#         69
+  C:0213H         LINE#         77
+  C:0250H         LINE#         80
+  C:0252H         LINE#         81
+  C:0255H         LINE#         82
+  C:0258H         LINE#         83
+  C:0259H         LINE#         85
+  C:025BH         LINE#         86
+  C:025EH         LINE#         87
+  C:0261H         LINE#         88
+  C:0263H         LINE#         89
+  C:0265H         LINE#         91
+  C:0266H         LINE#         93
+  C:0268H         LINE#         94
+  C:026AH         LINE#         96
+  C:0300H         LINE#         100
+  C:0302H         LINE#         101
+  C:0304H         LINE#         103
+  C:0306H         LINE#         104
+  C:0308H         LINE#         105
+  C:030AH         LINE#         107
+  C:030DH         LINE#         108
+  C:0310H         LINE#         110
+  C:0312H         LINE#         112
+  C:0314H         LINE#         113
+  C:0316H         LINE#         115
   -------         ENDMOD        SOURCE
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 005CH BYTE ( 4%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0082H BYTE ( 6%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=112
+BL51 BANKED LINKER/LOCATER V5.02                                                      01/09/2019  17:22:35  PAGE 3
+
+
+Program Size: data=8.0 xdata=0 code=791
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

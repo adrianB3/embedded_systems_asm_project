@@ -17,6 +17,22 @@ MAIN:	ACALL INIT	;apelare subrutina de initializare
 INIT:	CLR EA		;dezactivare globala a intreruperilor
 	MOV TMOD, #11H	;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizator cu declansare soft
 
+	;citire Talfa din memoria externa de la adresa 300h in R1
+	
+	MOV DPTR, #300H
+	MOVX R1, @DPTR	; R1 = Talfa
+	
+	;end citire din mem externa
+
+	;verificare limite Talfa 1--9ms TODO
+	; if Talfa >= limita inferioara -> ok else Talfa = Talfaminim
+	; if Talfa <= limita superioara -> ok else Talfa = Talfamaxim
+	;end verificare
+
+	;transformare Talfa (1--9ms) in valori ptr TL0, TH0 -- TODO
+	; n = 65535 - Talfa * 1000
+	;end transformare
+
 	MOV TL0, #9BH	;LSB pentru Talfa contorizat de timer0
 	MOV TH0, #0FFH	;MSB pentru Talfa contorizat de timer0
 

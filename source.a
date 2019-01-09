@@ -7,14 +7,17 @@
 	LJMP MAIN
 	ORG 000BH	;adresa intrerupere timer0
 	LJMP TIM0
-	ORG 001BH
-	LJMP TIM1	;adresa intrerupere timer1
+	ORG 001BH	;adresa intrerupere timer1
+	LJMP TIM1	
 
 	ORG 100H
 MAIN:	;--testing
 	MOV DPTR, #1000h;populare valori la adresa 1000h pentru testare aplicatie
-	MOV A, #1h;
+	MOV A, #17h
 	MOVX @DPTR, A	; Talfa = 1ms
+	INC DPTR
+	MOV A, #0FCh
+	MOVX @DPTR, A
 	;--testing
 
 	ACALL INIT	;apelare subrutina de initializare
@@ -25,8 +28,8 @@ INIT:	CLR EA		;dezactivare globala a intreruperilor
 	MOV TMOD, #11H	;configurare Timer0 si Timer1 in mod de lucru 1 pe 16b, temporizator cu declansare soft
 	
 	ACALL getTa;	;incarcare valoare Talfa in R2 si R3
-	MOV TL0, R2	;LSB pentru Talfa contorizat de timer0 #9BH
-	MOV TH0, R3	;MSB pentru Talfa contorizat de timer0 #0FFH
+	MOV TL0, R1	;LSB pentru Talfa contorizat de timer0 #9BH
+	MOV TH0, R2	;MSB pentru Talfa contorizat de timer0 #0FFH
 
 	MOV TL1, #0DFH	;LSB pentru T contorizat de timer1
 	MOV TH1, #0B1H	;MSB pentru T contorizat de timer1
@@ -48,18 +51,12 @@ INIT:	CLR EA		;dezactivare globala a intreruperilor
 getTa:	;citire Talfa din memoria externa de la adresa 1000h in R1	
 	MOV DPTR, #1000h
 	MOVX A, @DPTR
-	MOV R1, A	;R1 = Talfa
+	MOV R1, A	;R1 = Talfa LSB
+	INC DPTR
+	MOVX A, @DPTR
+	MOV R2, A	;R2 = Talfa MSB
 	;end citire din mem externa
 
-	;verificare limite Talfa 1--9ms TODO
-	; if Talfa >= limita inferioara -> ok else Talfa = Talfaminim
-	; if Talfa <= limita superioara -> ok else Talfa = Talfamaxim
-	;end verificare
-
-	;transformare Talfa (1--9ms) in valori ptr TL0, TH0 -- TODO
-	; n = 65535 - Talfa * 1000
-	; R2 - lsb of n, R3 - msb of n
-	;end transformare
 	RET
 
 	ORG 250H
@@ -87,8 +84,8 @@ TIM1:	CLR TR0
 	CLR TR1
 
 	ACALL getTa;	;incarcare valoare Talfa in R2 si R3
-	MOV TL0, R2	;LSB pentru Talfa contorizat de timer0
-	MOV TH0, R3 	;MSB pentru Talfa contorizat de timer0
+	MOV TL0, R1	;LSB pentru Talfa contorizat de timer0
+	MOV TH0, R2 	;MSB pentru Talfa contorizat de timer0
 	
         MOV TL1, #0DEH	;LSB pentru T contorizat de timer1, 20ms
 	MOV TH1, #0B1H	;MSB pentru T contorizat de timer1
